@@ -18,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
     },
     name: DataTypes.STRING,
     phone: DataTypes.STRING,
@@ -30,5 +29,18 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     tableName: 'users',
   });
+  // const User = sequelize.define('User', {
+  //   id: {
+  //         allowNull: false,
+  //         autoIncrement: true,
+  //         primaryKey: true,
+  //         type: DataTypes.UUID,
+  //         defaultValue: DataTypes.UUIDV4,
+  //       },
+  //       name: DataTypes.STRING,
+  //       phone: DataTypes.STRING,
+  //       email: DataTypes.STRING,
+  //       password: DataTypes.STRING,
+  // });
   return User;
 };
