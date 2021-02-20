@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MainRouter = require('./src/route');
+const db = require('./src/db/models/index');
 const app = express();
 const host = '0.0.0.0';
 const port = process.env.PORT || 3000;
@@ -15,4 +16,6 @@ app
 
 app.use('/api', MainRouter)
 
-app.listen(port, host ,() => console.log(`running on port ${port}`))
+db.sequelize.sync().then( () => {
+    app.listen(port, host ,() => console.log(`running on port ${port}`));
+});
