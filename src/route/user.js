@@ -1,9 +1,14 @@
 const { Router } = require('express');
-const {
-    indexTry,
-} = require('../controller/user');
 const UserRouter = new Router();
 
-UserRouter.get('/', indexTry);
+const {
+    indexAlrt,
+    getAllUser,
+    storeUser,
+} = require('../controller/user');
+
+UserRouter.get('/', indexAlrt)
+    .post('/reg', storeUser)
+    .get('/human', getAllUser);
 
 module.exports = UserRouter;
