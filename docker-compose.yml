@@ -9,26 +9,12 @@ services:
                         - /app/node_modules
                         - .:/app
                 container_name: express
-        db:
-                image: mysql:5.7
-                restart: "always"
-                tty: true
-                evironment: 
-                        MYSQL_DATABASE: alone
-                        MYSQL_ROOT_PASSWORD: 
-                        SERVICE_TAG: dev
-                        SERVICE_NAME: mysql
-                ports:
-                        - "3306:3306"
-        adminer:
-                image: adminer
-                restart: always
-                ports:
-                      - 8080:8080
-                depends_on:
-                        - mysql
-                links:
-                        - mysql
-                environment:
-                        ADMINER_DESIGN: 'pepa-linha'
-                        ADMINER_DEFAULT_SERVER: 'mysql'
+                networks:
+                        - api-network
+networks:
+        api-network:
+                driver: bridge
+
+# volumes:
+#         dbdata:
+#                 driver: local

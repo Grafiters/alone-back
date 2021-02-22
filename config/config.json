@@ -1,9 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "alone123",
     "database": "alone",
-    "host": "127.0.0.1",
+    "host": "3.22.217.221",
+    "port": "3306",
     "dialect": "mysql"
   }
 }
