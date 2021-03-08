@@ -3,7 +3,7 @@
     "username": "root",
     "password": "alone123",
     "database": "alone",
-    "host": "3.22.217.221",
+    "host": "149.129.218.11",
     "port": "3306",
     "dialect": "mysql"
   }
