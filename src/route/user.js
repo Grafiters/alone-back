@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const UserRouter = new Router();
+const auth = require('../middleware/jwtMiddleware')
+
 
 const {
     indexAlrt,
@@ -7,8 +9,8 @@ const {
     storeUser,
 } = require('../controller/user');
 
-UserRouter.get('/', indexAlrt)
+UserRouter.get('/', auth, indexAlrt)
     .post('/reg', storeUser)
-    .get('/human', getAllUser);
+    .get('/human', auth, getAllUser);
 
 module.exports = UserRouter;
