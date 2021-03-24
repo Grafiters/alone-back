@@ -11,11 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Threads.belongsTo(models.Posts, {foreignKey: 'PostId', as: 'threadsPosts'})
     }
   };
   Threads.init({
     like: DataTypes.INTEGER,
-    share: DataTypes.INTEGER
+    share: DataTypes.INTEGER,
+    PostId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Threads',
