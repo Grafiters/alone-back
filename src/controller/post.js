@@ -16,6 +16,7 @@ exports.storePost = async (req, res) => {
         title: req.body.title,
         descrip: req.body.descrip,
         url: req.body.url,
+        UserId: req.user.id
     }
     try{
         P_record.create(data)
@@ -23,6 +24,7 @@ exports.storePost = async (req, res) => {
             .send({
                 status: 200,
                 msg: 'store success comrede',
+                data: submit
             })
         )
     } catch ( err ){
@@ -33,7 +35,13 @@ exports.storePost = async (req, res) => {
 
 exports.getAllPost = async (req, res) => {
     try{
-        P_record.findAll()
+        P_record.findAll({
+            include: [
+                {
+                    model: Users,
+                }
+            ]
+        })
         .then( posts => res.status(200)
             .send({
                 status: 200,
@@ -43,7 +51,7 @@ exports.getAllPost = async (req, res) => {
         )
     } catch (err){
         res.status(500).send({
-            msg: "error retrieving tutorial with id = " + id
+            msg: "error retrieving tutorial with id"
         });
     }
 }

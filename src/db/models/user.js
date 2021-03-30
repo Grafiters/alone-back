@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     admin: DataTypes.BOOLEAN,
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Users',
     tableName: 'users',
   });
   // const User = sequelize.define('User', {
