@@ -10,14 +10,6 @@ const authJWT = (req, res, next) => {
         req.user = decoded;
         next();
     })
-
-    // if(authHeader){
-    //     const token = authHeader.split(' ')[1];
-
-        
-    // }else{
-    //     res.sendStatus(401);
-    // }
 }
 
 module.exports = authJWT;

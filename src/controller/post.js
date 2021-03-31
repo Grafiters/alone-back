@@ -1,12 +1,13 @@
-const post = require("../db/models");
-const P_record = post.Posts;
+const models = require("../db/models");
+const posts = models.Posts;
+const threads = models.Threads;
 
 exports.indexAlrt = async (req, res) => {
     return res.status(200).json([
         {
             msg: 'this is post comrede',
             msgReturn: 'you want to see all the post ?',
-            msgCoution: 'i am sorry you are not my admin'
+            msgCoution: 'i am sorry you are not my users'
         }
     ]);
 }
@@ -19,14 +20,26 @@ exports.storePost = async (req, res) => {
         UserId: req.user.id
     }
     try{
-        P_record.create(data)
-        .then( submit => res.status(201)
-            .send({
-                status: 200,
-                msg: 'store success comrede',
-                data: submit
-            })
-        )
+        posts.create(data)
+        .then( submit => {
+            const threads_data = {
+                like: 0,
+                share: 0,
+                PostId: submit.id
+            }
+            try {
+                threads.create(threads_data)
+                .then( result => res.status(201)
+                    .send({
+                        status: 201,
+                        msg: `Post Created`,
+                        datas: submit
+                    })
+                )
+            } catch (error) {
+                
+            }
+        })
     } catch ( err ){
         console.log(err.toString());
         res.status(500).send(err);
@@ -35,7 +48,7 @@ exports.storePost = async (req, res) => {
 
 exports.getAllPost = async (req, res) => {
     try{
-        P_record.findAll({
+        posts.findAll({
             include: [
                 {
                     model: Users,
@@ -59,7 +72,7 @@ exports.getAllPost = async (req, res) => {
 exports.getPostById = async (req, res) => {
     let id = req.params.id
     try{
-        P_record.findByPk(id)
+        posts.findByPk(id)
         .then( posts => res.status(200)
             .send({
                 status: 200,
@@ -76,7 +89,7 @@ exports.getPostById = async (req, res) => {
 exports.updatedPost = async (req, res) => {
     let id = req.params.id
     try{
-        P_record.update(req.body, {
+        posts.update(req.body, {
             where: { id: id }
         }).then(num => {
             if (num == 1){
@@ -98,3 +111,4 @@ exports.updatedPost = async (req, res) => {
         res.status(400).send(err);
     }
 }
+

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const user = require("../db/models");
-const U_record = user.User;
+const models = require("../db/models");
+const user = models.Users;
 
 exports.indexAlrt = async (req, res) => {
     return res.status(200).json([
@@ -15,25 +15,28 @@ exports.indexAlrt = async (req, res) => {
 }
 
 exports.storeUser = async (req, res) => {
-    const pass = await bcrypt.hash(req.body.password, 10);
-    const data = {
+    // const pass = await bcrypt.hash(req.body.password, 10);
+    const data_user = {
         name: req.body.name,
         phone: req.body.phone,
         email: req.body.email,
-        password: pass,
+        password: await bcrypt.hash(req.body.password, 10),
         admin: req.body.admin
     }
     try{
-        U_record.create(data)
-        .then( submit => res.status(201)
+        user.create(data_user)
+        .then(submit => res.status(200)
             .send({
                 status: 200,
                 msg: 'store success comrede',
+                data: submit
             })
         )
     } catch ( err ){
         console.log(err.toString());
-        res.status(500).send(err);
+        res.status(500).json({
+            msg: err
+        });
     }
 }
 

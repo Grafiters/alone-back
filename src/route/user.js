@@ -9,8 +9,8 @@ const {
     storeUser,
 } = require('../controller/user');
 
-UserRouter.get('/', auth, indexAlrt)
+UserRouter.get('/', indexAlrt)
     .post('/reg', storeUser)
-    .get('/human', auth, getAllUser);
+    .get('/human', getAllUser);
 
 module.exports = UserRouter;
