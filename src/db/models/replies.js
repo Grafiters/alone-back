@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Replies.init({
     like: DataTypes.INTEGER,
     share: DataTypes.INTEGER,
+    desc: DataTypes.STRING,
     UserId: DataTypes.INTEGER,
     PostId: DataTypes.INTEGER
   }, {

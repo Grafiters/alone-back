@@ -14,11 +14,14 @@ module.exports = {
       share: {
         type: Sequelize.INTEGER
       },
+      desc: {
+        type: Sequelize.STRING,
+      },
       UserId:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'User',
+          model: 'Users',
           key: 'id'
         }
       },

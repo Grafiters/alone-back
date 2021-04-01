@@ -50,9 +50,7 @@ exports.getAllPost = async (req, res) => {
     try{
         posts.findAll({
             include: [
-                {
-                    model: Users,
-                }
+                { model: Users }
             ]
         })
         .then( posts => res.status(200)
